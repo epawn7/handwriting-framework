@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import aop.AopBeanProcessHandler;
 import aop.AopClassParser;
+import aop.ProxyFactory;
 import scanner.ClassScanner;
 
 /**
@@ -27,9 +28,7 @@ public class IocContainer {
         beanFactory = new BeanFactory();
         scanner = new ClassScanner();
         scanner.addParser(new IocClassParser(beanFactory));
-
-        AopBeanProcessHandler processHandler = new AopBeanProcessHandler();
-
+        AopBeanProcessHandler processHandler = new AopBeanProcessHandler(new ProxyFactory());
         scanner.addParser(new AopClassParser(processHandler));
         beanFactory.addBeanProcessHandler(processHandler);
     }
