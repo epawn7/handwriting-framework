@@ -16,7 +16,7 @@ import lombok.Data;
  * @author jinfan 2022-06-21
  */
 @Data
-public class JdkProxyObj implements InvocationHandler {
+public class JdkProxyObj implements InvocationHandler, ProxyObj {
 
     private Object instance;
 
@@ -82,6 +82,11 @@ public class JdkProxyObj implements InvocationHandler {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void setOriginObj(Object obj) {
+        this.instance = obj;
     }
 
 }

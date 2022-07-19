@@ -19,4 +19,10 @@ public class ServiceA implements ServiceAI {
         serviceB.print();
     }
 
+    @LogAnn1
+    @Override
+    public void print2() {
+        System.out.println("service A");
+    }
+
 }

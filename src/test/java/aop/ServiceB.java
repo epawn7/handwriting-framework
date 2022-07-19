@@ -20,6 +20,7 @@ public class ServiceB {
     @LogAnn2
     public void print2(){
         System.out.println("222222");
+        serviceAI.print2();
     }
 
 }

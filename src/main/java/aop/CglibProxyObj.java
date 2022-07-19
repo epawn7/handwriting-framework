@@ -17,15 +17,13 @@ import net.sf.cglib.proxy.NoOp;
 /**
  * @author jinfan 2022-06-30
  */
-public class CglibProxyObj implements MethodInterceptor, CallbackFilter {
+public class CglibProxyObj implements MethodInterceptor, CallbackFilter, ProxyObj {
 
     private Map<Method, List<Class<?>>> methodMap;
 
     private Map<Method, Method> methodCache = new HashMap<>();
 
     private Object instance;
-
-    private Class<?> originClazz;
 
     @Override
     public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy) throws Throwable {
@@ -39,7 +37,7 @@ public class CglibProxyObj implements MethodInterceptor, CallbackFilter {
                 return ((aop.MethodInterceptor) IocContainer.getInstance().getBean(iterator.next())).invoke(invocation);
             } else {
                 try {
-                    return proxy.invokeSuper(obj, args);
+                    return method.invoke(instance, args);
                 } catch (Throwable e) {
                     e.printStackTrace();
                 }
@@ -53,9 +51,6 @@ public class CglibProxyObj implements MethodInterceptor, CallbackFilter {
 
     @Override
     public int accept(Method method) {
-        if (method.getDeclaringClass().equals(originClazz)) {
-            return 0;
-        }
         if (methodCache == null) {
             methodCache = new HashMap<>();
         }
@@ -90,8 +85,9 @@ public class CglibProxyObj implements MethodInterceptor, CallbackFilter {
         this.methodMap = methodMap;
     }
 
-    public void setInstance(Object instance) {
-        this.instance = instance;
+    @Override
+    public void setOriginObj(Object obj) {
+        this.instance = obj;
     }
 
 }

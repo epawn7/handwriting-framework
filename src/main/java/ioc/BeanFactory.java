@@ -69,11 +69,10 @@ public class BeanFactory {
             //果如bean可以提前初始化
             beanInstance.setConstruct(true);
             bean = factory.newEarlyBean(beanInstance.originClass());
+            beanInstance.setInstanct(bean);
             if (proxy != null) {
-                beanInstance.setInstanct(bean);
                 earlyBeanMap.put(beanType, proxy);
             } else {
-                beanInstance.setInstanct(bean);
                 earlyBeanMap.put(beanType, bean);
             }
         } else {
@@ -101,7 +100,7 @@ public class BeanFactory {
 
         beanInstance.setConstruct(false);
         earlyBeanMap.remove(beanType);
-        return bean;
+        return proxy != null ? proxy : bean;
     }
 
     private <T> Class<? extends T> getBeanType(Class<T> clazz) {

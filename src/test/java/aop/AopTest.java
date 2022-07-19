@@ -11,8 +11,8 @@ public class AopTest {
         IocContainer container = IocContainer.getInstance();
         container.scan(AopTest.class);
         container.init();
-        ServiceAI a = container.getBean(ServiceAI.class);
-        a.print();
+//        ServiceAI a = container.getBean(ServiceAI.class);
+//        a.print();
         ServiceB serviceB = container.getBean(ServiceB.class);
         serviceB.print2();
     }

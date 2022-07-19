@@ -28,6 +28,13 @@ public class TestMain {
 //        student.print();
 
 
+        Student proxy1 = createProxy();
+        Student proxy2 = createProxy();
+
+        System.out.printf(String.valueOf(proxy1.getClass().equals(proxy2.getClass())));
+    }
+
+    public static Student createProxy() {
         Enhancer enhancer1 = new Enhancer();
         enhancer1.setSuperclass(Student.class);
         Callback noopCb = NoOp.INSTANCE;
@@ -36,9 +43,7 @@ public class TestMain {
         enhancer1.setCallbackFilter(new MethodCallbackFileter());
         enhancer1.setStrategy(new MyClassStrategy());
         enhancer1.setInterfaces(new Class[]{MyInterface.class});
-        Student student1 = (Student) enhancer1.create();
-        student1.print();
-        System.out.println(student1.num(20));
+        return (Student) enhancer1.create();
     }
 
     public static class MyClassStrategy extends DefaultGeneratorStrategy {

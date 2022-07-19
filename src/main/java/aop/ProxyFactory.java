@@ -18,7 +18,7 @@ import util.MethodUtil;
  */
 public class ProxyFactory {
 
-    Map<Class<?>, JdkProxyObj> proxyObjMap = new HashMap<>();
+    Map<Class<?>, ProxyObj> proxyObjMap = new HashMap<>();
 
     private List<InterceptMatch> matchList;
 
@@ -88,6 +88,7 @@ public class ProxyFactory {
         proxyObj.setMethodMap(methodMap);
         enhancer.setCallbacks(new Callback[]{NoOp.INSTANCE, proxyObj});
         enhancer.setCallbackFilter(proxyObj);
+        proxyObjMap.put(beanInstance.originClass(), proxyObj);
         return enhancer.create();
     }
 
@@ -96,9 +97,9 @@ public class ProxyFactory {
     }
 
     public void setOriginBean(Class<?> clazz, Object bean) {
-        JdkProxyObj jdkProxyObj = proxyObjMap.get(clazz);
-        if (jdkProxyObj != null) {
-            jdkProxyObj.setInstance(bean);
+        ProxyObj proxyObj = proxyObjMap.get(clazz);
+        if (proxyObj != null) {
+            proxyObj.setOriginObj(bean);
         }
     }
 
