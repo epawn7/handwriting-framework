@@ -21,14 +21,12 @@ public class CglibProxyObj implements MethodInterceptor, CallbackFilter, ProxyOb
 
     private Map<Method, List<Class<?>>> methodMap;
 
-    private Map<Method, Method> methodCache = new HashMap<>();
-
     private Object instance;
 
     @Override
     public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy) throws Throwable {
         MethodInvocation.MethodInvocationBuilder invocationBuilder = new MethodInvocationBuilder();
-        List<Class<?>> methodInterceptors = methodMap.get(methodCache.get(method));
+        List<Class<?>> methodInterceptors = methodMap.get(method);
         Iterator<Class<?>> iterator = methodInterceptors.iterator();
         Class<?> aopClazz = iterator.next();
         aop.MethodInterceptor node = (aop.MethodInterceptor) IocContainer.getInstance().getBean(aopClazz);
@@ -51,17 +49,9 @@ public class CglibProxyObj implements MethodInterceptor, CallbackFilter, ProxyOb
 
     @Override
     public int accept(Method method) {
-        if (methodCache == null) {
-            methodCache = new HashMap<>();
-        }
-        Method realMethod = methodCache.get(method);
-        if (realMethod != null) {
-            return 1;
-        }
         for (Method m : methodMap.keySet()) {
             if (m.getName().equals(method.getName()) && m.getReturnType().equals(method.getReturnType())
                     && equalParamTypes(m.getParameterTypes(), method.getParameterTypes())) {
-                methodCache.put(method, m);
                 return 1;
             }
         }
