@@ -4,9 +4,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 
-/**
- * @author jinfan 2022-06-27
- */
 public interface ClassParser {
 
     boolean matchClass(Class<?> clazz);

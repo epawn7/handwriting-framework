@@ -1,8 +1,5 @@
 package ioc;
 
-/**
- * @author jinfan 2022-05-30
- */
 public class IocTest {
 
     public static void main(String[] args) {

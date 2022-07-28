@@ -13,9 +13,6 @@ import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.NoOp;
 import util.MethodUtil;
 
-/**
- * @author jinfan 2022-06-30
- */
 public class ProxyFactory {
 
     Map<Class<?>, ProxyObj> proxyObjMap = new HashMap<>();

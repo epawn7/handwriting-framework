@@ -9,9 +9,6 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 
-/**
- * @author jinfan 2022-06-08
- */
 public class ClassScanner {
 
     private List<ClassParser> classParserList;

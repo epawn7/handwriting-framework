@@ -5,9 +5,6 @@ import ioc.anno.Config;
 import jvm.command.Command;
 import jvm.entry.ClassPath;
 
-/**
- * @author jinfan 2022-07-22
- */
 @Config
 public class ConfigBean {
 

@@ -1,7 +1,6 @@
 package aop;
 
 import java.lang.reflect.Method;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -9,14 +8,9 @@ import aop.MethodInvocation.MethodInvocationBuilder;
 import aop.anno.MethodInvoke;
 import ioc.IocContainer;
 import net.sf.cglib.proxy.CallbackFilter;
-import net.sf.cglib.proxy.CallbackHelper;
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
-import net.sf.cglib.proxy.NoOp;
 
-/**
- * @author jinfan 2022-06-30
- */
 public class CglibProxyObj implements MethodInterceptor, CallbackFilter, ProxyObj {
 
     private Map<Method, List<Class<?>>> methodMap;

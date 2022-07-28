@@ -6,9 +6,6 @@ import java.util.stream.Collectors;
 import lombok.Data;
 import util.Log;
 
-/**
- * @author jinfan 2022-05-30
- */
 @Data
 public class MethodFactory implements Factory {
 

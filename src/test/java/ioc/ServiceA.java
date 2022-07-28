@@ -3,9 +3,6 @@ package ioc;
 import ioc.anno.Autowire;
 import ioc.anno.Compontment;
 
-/**
- * @author jinfan 2022-05-30
- */
 @Compontment
 public class ServiceA {
     @Autowire

@@ -15,9 +15,6 @@ import net.sf.cglib.proxy.NoOp;
 import net.sf.cglib.transform.ClassEmitterTransformer;
 import net.sf.cglib.transform.TransformingClassGenerator;
 
-/**
- * @author jinfan 2022-06-29
- */
 public class TestMain {
 
     public static void main(String[] args) {

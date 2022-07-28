@@ -6,9 +6,6 @@ import java.util.List;
 import java.util.Map;
 import lombok.Data;
 
-/**
- * @author jinfan 2022-06-08
- */
 @Data
 public class BeanFactory {
 

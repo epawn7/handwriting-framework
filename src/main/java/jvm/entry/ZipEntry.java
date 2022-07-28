@@ -6,9 +6,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.zip.ZipFile;
 
-/**
- * @author jinfan 2022-07-21
- */
 public class ZipEntry implements Entry {
 
     private String classDir;

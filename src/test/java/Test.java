@@ -4,9 +4,6 @@ import java.util.List;
 import ioc.Factory;
 import ioc.MethodFactory;
 
-/**
- * @author jinfan 2022-06-08
- */
 public class Test {
 
     public static void main(String[] args) {

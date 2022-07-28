@@ -2,9 +2,6 @@ package util;
 
 import java.lang.reflect.Method;
 
-/**
- * @author jinfan 2022-07-06
- */
 public class MethodUtil {
 
     public static boolean compareMethod(Method m1, Method m2) {

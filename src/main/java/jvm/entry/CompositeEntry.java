@@ -6,9 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * @author jinfan 2022-07-22
- */
 public class CompositeEntry implements Entry{
 
     private List<Entry> subEntry;

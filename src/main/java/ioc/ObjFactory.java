@@ -7,9 +7,6 @@ import java.util.Map;
 import lombok.Data;
 import util.Log;
 
-/**
- * @author jinfan 2022-05-27
- */
 @Data
 public class ObjFactory implements Factory {
 

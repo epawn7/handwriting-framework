@@ -31,11 +31,6 @@ public class ClassPath {
     public byte[] readClass(String className){
 
         byte[] bytes = bootClasspath.readClass(className);
-        if (bytes != null) {
-            for (byte b : bytes) {
-                System.out.println(b);
-            }
-        }
         return bytes;
     }
 

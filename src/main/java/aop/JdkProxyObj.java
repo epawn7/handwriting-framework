@@ -12,9 +12,6 @@ import aop.anno.MethodInvoke;
 import ioc.IocContainer;
 import lombok.Data;
 
-/**
- * @author jinfan 2022-06-21
- */
 @Data
 public class JdkProxyObj implements InvocationHandler, ProxyObj {
 

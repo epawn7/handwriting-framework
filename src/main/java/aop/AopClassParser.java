@@ -8,9 +8,6 @@ import java.util.List;
 import aop.anno.Aspect;
 import scanner.ClassParser;
 
-/**
- * @author jinfan 2022-06-27
- */
 public class AopClassParser implements ClassParser {
 
 

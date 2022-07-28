@@ -1,8 +1,5 @@
 package util;
 
-/**
- * @author jinfan 2022-05-30
- */
 public class Log {
 
     public static void debug(String msg) {

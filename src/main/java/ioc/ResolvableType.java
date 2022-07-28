@@ -1,8 +1,5 @@
 package ioc;
 
-/**
- * @author jinfan 2022-06-10
- */
 public class ResolvableType {
 
     public Class<?> rawClazz;

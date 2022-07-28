@@ -1,8 +1,5 @@
 package ioc;
 
-/**
- * @author jinfan 2022-06-23
- */
 public class AbstractBean<T> implements BeanInstance<T> {
 
     private T instanct;

@@ -1,15 +1,9 @@
 package aop;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import ioc.BeanInstance;
 import ioc.BeanProcessHandler;
 
-/**
- * @author jinfan 2022-06-24
- */
 public class AopBeanProcessHandler implements BeanProcessHandler {
 
     private ProxyFactory proxyFactory;

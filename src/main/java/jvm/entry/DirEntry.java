@@ -6,9 +6,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
-/**
- * @author jinfan 2022-07-21
- */
 public class DirEntry implements Entry {
 
     private String classDir;

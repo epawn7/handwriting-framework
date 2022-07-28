@@ -10,9 +10,6 @@ import ioc.anno.Compontment;
 import ioc.anno.Config;
 import scanner.ClassParser;
 
-/**
- * @author jinfan 2022-06-27
- */
 public class IocClassParser implements ClassParser {
 
     private BeanFactory beanFactory;

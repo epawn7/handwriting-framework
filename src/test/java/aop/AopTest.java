@@ -2,9 +2,6 @@ package aop;
 
 import ioc.IocContainer;
 
-/**
- * @author jinfan 2022-06-27
- */
 public class AopTest {
 
     public static void main(String[] args) {

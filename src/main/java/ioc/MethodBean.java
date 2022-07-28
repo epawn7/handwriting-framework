@@ -5,9 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 import lombok.Data;
 
-/**
- * @author jinfan 2022-06-08
- */
 @Data
 public class MethodBean<T> implements BeanInstance<T> {
 

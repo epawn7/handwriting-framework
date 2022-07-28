@@ -5,9 +5,6 @@ import aop.anno.MethodInvoke;
 import lombok.Builder;
 import lombok.Data;
 
-/**
- * @author jinfan 2022-06-27
- */
 @Data
 @Builder
 public class MethodInvocation {

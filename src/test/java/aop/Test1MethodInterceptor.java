@@ -4,9 +4,6 @@ import java.lang.reflect.Method;
 import aop.anno.Aspect;
 import ioc.anno.Compontment;
 
-/**
- * @author jinfan 2022-06-27
- */
 @Aspect
 @Compontment
 public class Test1MethodInterceptor implements MethodInterceptor {

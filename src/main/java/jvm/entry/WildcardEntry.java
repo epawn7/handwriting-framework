@@ -2,12 +2,8 @@ package jvm.entry;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-/**
- * @author jinfan 2022-07-22
- */
 public class WildcardEntry implements Entry {
     private CompositeEntry compositeEntry;
 

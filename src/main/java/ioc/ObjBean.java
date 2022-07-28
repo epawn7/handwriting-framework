@@ -7,9 +7,6 @@ import java.util.stream.Collectors;
 import ioc.anno.Autowire;
 import lombok.Data;
 
-/**
- * @author jinfan 2022-06-08
- */
 @Data
 public class ObjBean<T> extends AbstractBean<T> {
 

@@ -7,9 +7,6 @@ import aop.AopClassParser;
 import aop.ProxyFactory;
 import scanner.ClassScanner;
 
-/**
- * @author jinfan 2022-05-27
- */
 public class IocContainer {
 
     private static final IocContainer iocContainer = new IocContainer();
