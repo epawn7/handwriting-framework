@@ -3,7 +3,7 @@ package jvm.clazz.attribute;
 import jvm.clazz.ClassReader;
 
 /**
- * @author jinfan 2022-07-28
+ 2022-07-28
  */
 public class UnparseAttributeInfo extends AttributeInfo {
 

@@ -8,7 +8,6 @@ import jvm.clazz.ClassReader;
  * name_index 和 descriptor_index 都是常量池索引，指向 CONSTANT_Utf8_info 常量。
  * 字段和方法名就是代码中出现的（或者编译器生成的）字段或方法的名字。
  *
- * @author jinfan 2022-07-25
  */
 public class ConstantNameAndType extends ConstantInfo {
 
@@ -22,10 +21,27 @@ public class ConstantNameAndType extends ConstantInfo {
      */
     short descriptorIndex;
 
+    ConstantInfo[] constantInfos;
+
+    public ConstantNameAndType(byte type, ConstantInfo[] constantInfos) {
+        super(type);
+        this.constantInfos = constantInfos;
+    }
+
     @Override
     public void readBytes(ClassReader reader) {
         nameIndex = reader.readU2ToShort();
         descriptorIndex = reader.readU2ToShort();
+    }
+
+    public String getName() {
+        ConstantUtf8 constantUtf8 = (ConstantUtf8) constantInfos[nameIndex];
+        return constantUtf8.getValue();
+    }
+
+    public String getDescriptor() {
+        ConstantUtf8 constantUtf8 = (ConstantUtf8) constantInfos[descriptorIndex];
+        return constantUtf8.getValue();
     }
 
 }

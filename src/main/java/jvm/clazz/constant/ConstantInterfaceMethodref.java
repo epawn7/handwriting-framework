@@ -10,7 +10,6 @@ import jvm.clazz.ClassReader;
  * u2 name_and_type_index;
  * }
  *
- * @author jinfan 2022-07-27
  */
 public class ConstantInterfaceMethodref extends ConstantInfo {
 
@@ -18,10 +17,32 @@ public class ConstantInterfaceMethodref extends ConstantInfo {
 
     short nameAndTypeIndex;
 
+    ConstantInfo[] constantInfos;
+
+    public ConstantInterfaceMethodref(byte type, ConstantInfo[] constantInfos) {
+        super(type);
+        this.constantInfos = constantInfos;
+    }
+
     @Override
     public void readBytes(ClassReader reader) {
         this.classIndex = reader.readU2ToShort();
         this.nameAndTypeIndex = reader.readU2ToShort();
+    }
+
+    public String getClassName() {
+        ConstantClass constantClass = (ConstantClass) constantInfos[classIndex];
+        return constantClass.getClassName();
+    }
+
+    public String getDescriptor() {
+        ConstantNameAndType nameAndType = (ConstantNameAndType) constantInfos[nameAndTypeIndex];
+        return nameAndType.getDescriptor();
+    }
+
+    public String getName() {
+        ConstantNameAndType nameAndType = (ConstantNameAndType) constantInfos[nameAndTypeIndex];
+        return nameAndType.getName();
     }
 
 }

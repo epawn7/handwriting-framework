@@ -1,7 +1,9 @@
 package jvm.clazz;
 
 import jvm.clazz.attribute.AttributeInfo;
+import jvm.clazz.constant.ConstantClass;
 import jvm.clazz.constant.ConstantInfo;
+import jvm.clazz.constant.ConstantUtf8;
 
 /**
  * ClassFile {
@@ -113,6 +115,22 @@ public class ClassFile {
      * 属性表集合
      */
     AttributeInfo[] attributes;
+
+    public String getClassName() {
+        ConstantClass constantClass = (ConstantClass) constantPool[thisClass];
+        ConstantUtf8 constantUtf8 = (ConstantUtf8) constantPool[constantClass.getNameIndex()];
+        return constantUtf8.getValue();
+    }
+
+    public String getSuperClassName() {
+        if (superClass == 0) {
+            //类为Object时,superClass为0
+            return "";
+        }
+        ConstantClass constantClass = (ConstantClass) constantPool[superClass];
+        ConstantUtf8 constantUtf8 = (ConstantUtf8) constantPool[constantClass.getNameIndex()];
+        return constantUtf8.getValue();
+    }
 
     public int getMagic() {
         return magic;

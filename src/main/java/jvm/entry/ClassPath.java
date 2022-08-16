@@ -4,12 +4,10 @@ import java.io.File;
 import java.io.IOException;
 import jvm.command.Command;
 
-/**
- * @author jinfan 2022-07-21
- */
 public class ClassPath {
 
     public static final String pathListSeparator = System.getProperty("os.name").contains("Windows") ? ";" : ":";
+
     /**
      * jre的class path
      */
@@ -28,9 +26,17 @@ public class ClassPath {
         userClasspath = parseUserClasspath(command.getUserClassPath());
     }
 
-    public byte[] readClass(String className){
-
+    public byte[] readClass(String className) {
+        if (className.endsWith(".class")) {
+            throw new RuntimeException("类文件名称错误");
+        }
+        className = className.replace(".", "/");
+        className = className + ".class";
         byte[] bytes = bootClasspath.readClass(className);
+        if (bytes != null) {
+            return bytes;
+        }
+        bytes = userClasspath.readClass(className);
         return bytes;
     }
 
@@ -48,11 +54,7 @@ public class ClassPath {
     }
 
     private Entry parseUserClasspath(String jrePath) {
-        if (jrePath == null) {
-            return null;
-        }
-        String jreExtPath = jrePath + File.separator + "lib" + File.separator + "ext" + File.separator + "*";
-        return createEntry(jreExtPath);
+        return createEntry(jrePath);
     }
 
     private Entry createEntry(String path) {
@@ -77,4 +79,5 @@ public class ClassPath {
         }
         throw new RuntimeException("illegal classpath format,or you should point out the classpath explicitly");
     }
+
 }

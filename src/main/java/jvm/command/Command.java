@@ -1,7 +1,7 @@
 package jvm.command;
 
 /**
- * @author jinfan 2022-07-20
+ 2022-07-20
  */
 public class Command {
     private String[] args;

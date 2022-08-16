@@ -1,9 +1,11 @@
 package jvm;
 
 import ioc.IocContainer;
-import jvm.clazz.ClassReader;
 import jvm.command.Command;
-import jvm.entry.ClassPath;
+import jvm.instructions.Interpreter;
+import jvm.rtda.heap.ClassLoader;
+import jvm.rtda.heap.Clazz;
+import jvm.rtda.heap.Method;
 
 public class JVMApp {
 
@@ -11,19 +13,23 @@ public class JVMApp {
         IocContainer container = IocContainer.getInstance();
         container.scan(JVMApp.class);
         container.init();
-        ClassPath classPath = container.getBean(ClassPath.class);
         Command command = container.getBean(Command.class);
-        byte[] bytes = classPath.readClass(command.getClazz());
-        ClassReader classReader = container.getBean(ClassReader.class);
-        classReader.read(bytes);
-        System.out.println(bytes.length);
+        ClassLoader classLoader = container.getBean(ClassLoader.class);
+        Clazz clazz = classLoader.loadClass(command.getClazz());
+        Method mainMethod = getMainMethod(clazz);
+        Interpreter interpreter = new Interpreter();
+        interpreter.interpret(mainMethod, true);
     }
 
-    public static Command createCommand() {
-        Command command = new Command();
-        command.setRight(true);
-        command.setClassPath("");
-        return command;
+    private static Method getMainMethod(Clazz clazz) {
+        Method[] methods = clazz.getMethods();
+        for (Method method : methods) {
+            if (method.isStastic() && method.getName().equals("main") && method.getDescriptor()
+                    .equals("([Ljava/lang/String;)V")) {
+                return method;
+            }
+        }
+        return null;
     }
 
 }

@@ -111,4 +111,16 @@ public class CodeAttribute extends AttributeInfo {
 
     }
 
+    public short getMaxStack() {
+        return maxStack;
+    }
+
+    public short getMaxLocals() {
+        return maxLocals;
+    }
+
+    public byte[] getCode() {
+        return code;
+    }
+
 }

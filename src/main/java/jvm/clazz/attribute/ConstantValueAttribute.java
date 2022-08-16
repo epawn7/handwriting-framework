@@ -6,7 +6,7 @@ import jvm.clazz.ClassReader;
  * ConstantValue 是定长属性，只会出现在 field_info 结构中，用于表示常量表达式的值。
  * 只有被 static 修饰的变量（类变量）才可以使用这项属性。
  *
- * @author jinfan 2022-07-26
+ 2022-07-26
  */
 public class ConstantValueAttribute extends AttributeInfo {
 
@@ -24,6 +24,10 @@ public class ConstantValueAttribute extends AttributeInfo {
     @Override
     void parseBytes(ClassReader reader) {
         constantvalueIndex = reader.readU2ToShort();
+    }
+
+    public short getConstantvalueIndex() {
+        return constantvalueIndex;
     }
 
 }

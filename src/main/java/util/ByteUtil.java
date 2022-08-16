@@ -52,15 +52,26 @@ public class ByteUtil {
 
     public static void main(String[] args) {
         byte[] bytes = new byte[4];
-        bytes[0] = 2;
+        bytes[0] = -2;
         bytes[1] = 2;
         bytes[2] = 2;
         bytes[3] = 2;
         int i = parseByteToInt(bytes);
         System.out.println(i);
-        System.out.println(2 << 0 | 0);
+        System.out.println(-2 << 0 | 0);
         System.out.println(2 << 8 | 2);
         System.out.println(2 << 16);
+
+        System.out.println("------------");
+        byte b1 = -123;
+        byte b2 = 120;
+
+        System.out.println((b1 & 0xFF) << 8 | b2);
+
+        System.out.println((b1 & 0x000000FF) << 8 | b2);
+
+        System.out.println(((b1 + 256) % 256) << 8 | b2);
+
     }
 
 }

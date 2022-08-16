@@ -3,7 +3,6 @@ package jvm.clazz.attribute;
 import jvm.clazz.ClassReader;
 
 /**
- * @author jinfan 2022-07-26
  */
 public class SourceFileAttribute extends AttributeInfo {
 

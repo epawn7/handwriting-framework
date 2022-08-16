@@ -3,7 +3,7 @@ package jvm.clazz.attribute;
 import ioc.anno.Compontment;
 
 /**
- * @author jinfan 2022-07-28
+ 2022-07-28
  */
 @Compontment
 public class AttributeFactory {

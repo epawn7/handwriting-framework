@@ -3,13 +3,17 @@ package jvm.clazz.constant;
 import jvm.clazz.ClassReader;
 
 /**
- * @author jinfan 2022-07-27
+ *
  */
 public class ConstantInvokeDynamic extends ConstantInfo {
 
     short bootstrapMethodAttrIndex;
 
     short nameAndTypeIndex;
+
+    public ConstantInvokeDynamic(byte type) {
+        super(type);
+    }
 
     @Override
     public void readBytes(ClassReader reader) {

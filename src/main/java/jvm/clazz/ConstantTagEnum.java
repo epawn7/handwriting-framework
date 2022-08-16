@@ -3,7 +3,7 @@ package jvm.clazz;
 import java.util.Arrays;
 
 /**
- * @author jinfan 2022-07-25
+ 2022-07-25
  */
 public enum ConstantTagEnum {
 

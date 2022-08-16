@@ -1,6 +1,7 @@
 package jvm.clazz;
 
 import jvm.clazz.attribute.AttributeInfo;
+import jvm.clazz.attribute.CodeAttribute;
 
 /**
  * 方法表,方法和字段描述基本一样
@@ -11,8 +12,6 @@ import jvm.clazz.attribute.AttributeInfo;
  * u2 attributes_count;	//方法的额外附加属性数量
  * attribute_info attributes[attributes_count];	//方法的额外的附加属性
  * }
- *
- * @author jinfan 2022-07-26
  */
 public class MethodInfo {
 
@@ -42,5 +41,40 @@ public class MethodInfo {
      * 字段的额外的附加属性
      */
     AttributeInfo attributes[];
+
+    /**
+     * 返回codeAttribute
+     */
+    public CodeAttribute getCodeAttribute() {
+        if (attributes == null) {
+            return null;
+        }
+        for (AttributeInfo attribute : attributes) {
+            if (attribute instanceof CodeAttribute) {
+                return (CodeAttribute) attribute;
+            }
+        }
+        return null;
+    }
+
+    public short getAccessFlags() {
+        return accessFlags;
+    }
+
+    public short getNameIndex() {
+        return nameIndex;
+    }
+
+    public short getDescriptorIndex() {
+        return descriptorIndex;
+    }
+
+    public short getAttributesCount() {
+        return attributesCount;
+    }
+
+    public AttributeInfo[] getAttributes() {
+        return attributes;
+    }
 
 }

@@ -6,7 +6,7 @@ import jvm.clazz.ClassReader;
  * 最简单的属性，仅起标记作用，不包含任何数据。
  * Deprecated 属性用于指出类、接口、字段或方法已经不建议使用
  *
- * @author jinfan 2022-07-26
+ 2022-07-26
  */
 public class DeprecatedAttribute extends AttributeInfo {
 

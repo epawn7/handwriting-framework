@@ -13,7 +13,7 @@ import jvm.clazz.constant.ConstantUtf8;
 import util.ByteUtil;
 
 /**
- * @author jinfan 2022-07-22
+ 2022-07-22
  */
 @Compontment
 public class ClassReader {
@@ -31,6 +31,7 @@ public class ClassReader {
     private AttributeFactory attributeFactory;
 
     public ClassFile read(byte[] classBytes) {
+        index = 0;
         this.classBytes = classBytes;
         classFile = new ClassFile();
         byte[] bytes = readBytes(4);
@@ -44,7 +45,7 @@ public class ClassReader {
         classFile.constantPool = new ConstantInfo[classFile.constantPoolCount];
         for (int i = 1; i < classFile.constantPoolCount; i++) {
             byte tag = readU1ToByte();
-            classFile.constantPool[i] = constantFactory.create(tag);
+            classFile.constantPool[i] = constantFactory.create(tag, classFile.constantPool);
             classFile.constantPool[i].readBytes(this);
             if ((classFile.constantPool[i] instanceof ConstantLong)
                     || (classFile.constantPool[i] instanceof ConstantDouble)) {
@@ -57,7 +58,7 @@ public class ClassReader {
         classFile.interfaceCount = readU2ToShort();
         if (classFile.interfaceCount > 0) {
             classFile.interfaces = new short[classFile.interfaceCount];
-            for (int i = 0; i <= classFile.interfaceCount; i++) {
+            for (int i = 0; i < classFile.interfaceCount; i++) {
                 classFile.interfaces[i] = readU2ToShort();
             }
         }
@@ -118,7 +119,7 @@ public class ClassReader {
     public short readU2ToShort() {
         short a = 0;
         for (int i = 0; i < 2; i++) {
-            a = (short) (a << (8 * i) | classBytes[index + i]);
+            a = (short) (a << 8 | (classBytes[index + i] & 0xFF));
         }
         index += 2;
         return a;
@@ -127,7 +128,7 @@ public class ClassReader {
     public int readU4ToInt() {
         int a = 0;
         for (int i = 0; i < 4; i++) {
-            a = a << (8 * i) | classBytes[index + i];
+            a = a << 8 | (classBytes[index + i] & 0x000000FF);
         }
         index += 4;
         return a;
@@ -136,7 +137,7 @@ public class ClassReader {
     public long readU8ToLong() {
         long a = 0;
         for (int i = index; i < 8; i++) {
-            a = a << (8 * i) | (long) classBytes[index + i];
+            a = a << 8 | (long) (classBytes[index + i] & 0x00FF);
         }
         index += 8;
         return a;

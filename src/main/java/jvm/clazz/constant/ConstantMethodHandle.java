@@ -3,13 +3,17 @@ package jvm.clazz.constant;
 import jvm.clazz.ClassReader;
 
 /**
- * @author jinfan 2022-07-27
+ * 2022-07-27
  */
 public class ConstantMethodHandle extends ConstantInfo {
 
     private byte referenceKind;
 
     private short referenceIndex;
+
+    public ConstantMethodHandle(byte type) {
+        super(type);
+    }
 
 
     @Override

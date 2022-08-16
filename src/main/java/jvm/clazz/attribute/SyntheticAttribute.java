@@ -9,7 +9,7 @@ import jvm.clazz.ClassReader;
  *
  * 主要为桥接方法.在使用泛型后,编译器会生成桥接代码
  *
- * @author jinfan 2022-07-26
+ 2022-07-26
  */
 public class SyntheticAttribute extends AttributeInfo {
 

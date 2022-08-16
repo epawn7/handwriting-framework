@@ -9,8 +9,6 @@ import jvm.clazz.ClassReader;
  * u2 class_index;
  * u2 name_and_type_index;
  * }
- *
- * @author jinfan 2022-07-27
  */
 public class ConstantFieldref extends ConstantInfo {
 
@@ -18,10 +16,32 @@ public class ConstantFieldref extends ConstantInfo {
 
     short nameAndTypeIndex;
 
+    ConstantInfo[] constantInfos;
+
+    public ConstantFieldref(byte type, ConstantInfo[] constantInfos) {
+        super(type);
+        this.constantInfos = constantInfos;
+    }
+
     @Override
     public void readBytes(ClassReader reader) {
         this.classIndex = reader.readU2ToShort();
         this.nameAndTypeIndex = reader.readU2ToShort();
+    }
+
+    public String getClassName() {
+        ConstantClass constantClass = (ConstantClass) constantInfos[classIndex];
+        return constantClass.getClassName();
+    }
+
+    public String getDescriptor() {
+        ConstantNameAndType nameAndType = (ConstantNameAndType) constantInfos[nameAndTypeIndex];
+        return nameAndType.getDescriptor();
+    }
+
+    public String getName() {
+        ConstantNameAndType nameAndType = (ConstantNameAndType) constantInfos[nameAndTypeIndex];
+        return nameAndType.getName();
     }
 
 }

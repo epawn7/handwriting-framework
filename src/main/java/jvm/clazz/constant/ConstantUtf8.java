@@ -8,7 +8,7 @@ import jvm.clazz.ClassReader;
  * 代表常量池中的字符串.
  * 字符串在class文件中以MUTF-8变法存在.和utf8大致相同,但不兼容
  *
- * @author jinfan 2022-07-25
+ 2022-07-25
  */
 public class ConstantUtf8 extends ConstantInfo {
 
@@ -17,6 +17,10 @@ public class ConstantUtf8 extends ConstantInfo {
     byte[] bytes;
 
     String value;
+
+    public ConstantUtf8(byte type) {
+        super(type);
+    }
 
     @Override
     public void readBytes(ClassReader reader) {

@@ -12,15 +12,15 @@ public class ConfigBean {
     public Command command(){
         Command command = new Command();
         command.setClassPath("D:\\software\\java-se-8u41-ri\\jre");
+        command.setUserClassPath("D:\\workspace\\study\\handwriting-framework\\target\\classes");
         command.setRight(true);
-        command.setClazz("java/lang/Object.class");
+        command.setClazz("jvm.TestMain2");
         return command;
     }
 
     @Bean
     public ClassPath classPath(Command command){
         ClassPath classPath = new ClassPath(command);
-
         return classPath;
     }
 }

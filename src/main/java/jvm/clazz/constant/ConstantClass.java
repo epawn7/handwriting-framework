@@ -4,8 +4,6 @@ import jvm.clazz.ClassReader;
 
 /**
  * CONSTANT_Class_info 常量表示类或者接口的符号引用，指向是接口或者类名。
- *
- * @author jinfan 2022-07-25
  */
 public class ConstantClass extends ConstantInfo {
 
@@ -16,9 +14,25 @@ public class ConstantClass extends ConstantInfo {
      */
     short nameIndex;
 
+    ConstantInfo[] constantInfos;
+
+    public ConstantClass(byte type, ConstantInfo[] constantInfos) {
+        super(type);
+        this.constantInfos = constantInfos;
+    }
+
     @Override
     public void readBytes(ClassReader reader) {
         nameIndex = reader.readU2ToShort();
+    }
+
+    public String getClassName() {
+        ConstantUtf8 constantUtf8 = (ConstantUtf8) constantInfos[nameIndex];
+        return constantUtf8.getValue();
+    }
+
+    public short getNameIndex() {
+        return nameIndex;
     }
 
 }
