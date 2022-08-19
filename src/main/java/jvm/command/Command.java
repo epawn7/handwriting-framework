@@ -16,6 +16,8 @@ public class Command {
 
     private String[] options;
 
+    private boolean printLog;
+
     public String getUserClassPath() {
         return userClassPath;
     }
@@ -62,6 +64,14 @@ public class Command {
 
     public void setOptions(String[] options) {
         this.options = options;
+    }
+
+    public boolean isPrintLog() {
+        return printLog;
+    }
+
+    public void setPrintLog(boolean printLog) {
+        this.printLog = printLog;
     }
 
 }

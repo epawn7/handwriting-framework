@@ -14,7 +14,8 @@ public class ConfigBean {
         command.setClassPath("D:\\software\\java-se-8u41-ri\\jre");
         command.setUserClassPath("D:\\workspace\\study\\handwriting-framework\\target\\classes");
         command.setRight(true);
-        command.setClazz("jvm.TestMain2");
+        command.setClazz("jvm/TestMain3");
+        command.setPrintLog(false);
         return command;
     }
 

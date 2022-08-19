@@ -14,7 +14,7 @@ public class FSUB extends NoOperandsInstruction {
         OperandStack stack = frame.getOperandStack();
         float v2 = stack.popFloat();
         float v1 = stack.popFloat();
-        stack.pushDouble(v1 - v2);
+        stack.pushFloat(v1 - v2);
     }
 
 }

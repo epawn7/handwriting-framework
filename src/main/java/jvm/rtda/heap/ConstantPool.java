@@ -44,10 +44,12 @@ public class ConstantPool {
                 case CONSTANT_Long_info:
                     ConstantLong constantLong = (ConstantLong) constantPool[i];
                     constants[i] = new Constant(constantLong.getValue(), type);
+                    i++;
                     break;
                 case CONSTANT_Double_info:
                     ConstantDouble constantDouble = (ConstantDouble) constantPool[i];
                     constants[i] = new Constant(constantDouble.getValue(), type);
+                    i++;
                     break;
                 case CONSTANT_String_info:
                     ConstantString constantString = (ConstantString) constantPool[i];

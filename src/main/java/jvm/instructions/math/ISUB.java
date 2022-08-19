@@ -14,7 +14,7 @@ public class ISUB extends NoOperandsInstruction {
         OperandStack stack = frame.getOperandStack();
         int v2 = stack.popInt();
         int v1 = stack.popInt();
-        stack.pushLong(v1 - v2);
+        stack.pushInt(v1 - v2);
     }
 
 }

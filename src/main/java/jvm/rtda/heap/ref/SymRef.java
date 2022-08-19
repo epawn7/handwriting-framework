@@ -38,7 +38,7 @@ public abstract class SymRef {
     /**
      * 加载类信息
      */
-    public void resolveClassInfo() {
+    private void resolveClassInfo() {
         //获取类加载器
         ClassLoader classLoader = constantPool.getClazz().getClassLoader();
         //加载类

@@ -8,6 +8,7 @@ import jvm.clazz.ClassFile;
 import jvm.clazz.ClassReader;
 import jvm.entry.ClassPath;
 import jvm.rtda.LocalVars;
+import jvm.rtda.Object;
 
 /**
  * 类加载器
@@ -37,7 +38,16 @@ public class ClassLoader {
         if (clazz != null) {
             return clazz;
         }
+        if (name.startsWith("[")) {
+            return loadArrayClass(name);
+        }
         return loadNoArrayClass(name);
+    }
+
+    public Clazz loadArrayClass(String name) {
+        Clazz clazz = new Clazz(name, this);
+        classMap.put(name, clazz);
+        return clazz;
     }
 
     public Clazz loadNoArrayClass(String name) {
@@ -133,7 +143,8 @@ public class ClassLoader {
                     staticVars.setDouble(field.slotId, (double) cp.getConstant(cpIndex).val);
                     break;
                 case "Ljava/lang/String;":
-                    System.out.println("string todo");
+                    Object strObj = StringPool.newJString(clazz.getClassLoader(), (String) cp.getConstant(cpIndex).val);
+                    staticVars.setRef(field.slotId, strObj);
                     break;
             }
         }

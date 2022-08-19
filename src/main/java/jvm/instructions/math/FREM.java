@@ -14,7 +14,7 @@ public class FREM extends NoOperandsInstruction {
         OperandStack stack = frame.getOperandStack();
         float v1 = stack.popFloat();
         float v2 = stack.popFloat();
-        stack.pushDouble(v2 % v1);
+        stack.pushFloat(v2 % v1);
     }
 
 }

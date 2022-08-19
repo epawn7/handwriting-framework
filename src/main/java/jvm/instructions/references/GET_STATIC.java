@@ -38,24 +38,25 @@ public class GET_STATIC extends Index16Instruction {
             throw new RuntimeException("类编译异常");
         }
 
-        switch (field.getDescriptor()) {
-            case "Z":
-            case "B":
-            case "C":
-            case "S":
-            case "I":
+        switch (field.getDescriptor().charAt(0)) {
+            case 'Z':
+            case 'B':
+            case 'C':
+            case 'S':
+            case 'I':
                 stack.pushInt(staticVars.getInt(field.getSlotId()));
                 break;
-            case "F":
+            case 'F':
                 stack.pushFloat(staticVars.getFloat(field.getSlotId()));
                 break;
-            case "J":
+            case 'J':
                 stack.pushLong(staticVars.getLong(field.getSlotId()));
                 break;
-            case "D":
+            case 'D':
                 stack.pushDouble(staticVars.getDouble(field.getSlotId()));
                 break;
-            case "L":
+            case 'L':
+            case '[':
                 stack.pushRef(staticVars.getRef(field.getSlotId()));
                 break;
         }

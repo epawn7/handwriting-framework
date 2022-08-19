@@ -74,6 +74,9 @@ public class MethodDescriptor {
                 String str = descriptor.substring(index, endIndex);
                 index = endIndex + 1;
                 return str;
+            case '[':
+                index++;
+                return "[" + parseField();
             default:
                 return "";
         }

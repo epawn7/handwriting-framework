@@ -10,6 +10,7 @@ import jvm.rtda.heap.ConstantPool;
 import jvm.rtda.heap.Field;
 import jvm.rtda.heap.Method;
 import jvm.rtda.heap.ref.FieldRef;
+import util.Log;
 
 /**
  * 类的某个静态变量赋值
@@ -51,25 +52,29 @@ public class PUT_STATIC extends Index16Instruction {
             }
         }
         //从操作栈中获取数据,放入到静态表中
-        switch (field.getDescriptor()) {
-            case "Z":
-            case "B":
-            case "C":
-            case "S":
-            case "I":
+        Log.debug("pus_static,field.getDescriptor:{}", field.getDescriptor());
+        switch (field.getDescriptor().charAt(0)) {
+            case 'Z':
+            case 'B':
+            case 'C':
+            case 'S':
+            case 'I':
                 staticVars.setInt(field.getSlotId(), stack.popInt());
                 break;
-            case "F":
+            case 'F':
                 staticVars.setFloat(field.getSlotId(), stack.popFloat());
                 break;
-            case "J":
+            case 'J':
                 staticVars.setLong(field.getSlotId(), stack.popLong());
                 break;
-            case "D":
+            case 'D':
                 staticVars.setDouble(field.getSlotId(), stack.popDouble());
                 break;
-            case "L":
+            case 'L':
+            case '[':
                 staticVars.setRef(field.getSlotId(), stack.popRef());
+                break;
+            default:
                 break;
         }
     }

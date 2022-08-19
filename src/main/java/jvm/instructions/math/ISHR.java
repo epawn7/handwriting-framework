@@ -17,7 +17,7 @@ public class ISHR extends NoOperandsInstruction {
         //待处理数据
         int v2 = stack.popInt();
         //v1 & 0x1f  表示int最多32位,所以v1最大值只能为32,取前5位就够了
-        stack.pushLong(v2 >> (v1 & 0x1f));
+        stack.pushInt(v2 >> (v1 & 0x1f));
     }
 
 }

@@ -3,6 +3,7 @@ package jvm.rtda.heap;
 import jvm.clazz.ClassFile;
 import jvm.clazz.constant.ConstantClass;
 import jvm.clazz.constant.ConstantUtf8;
+import jvm.instructions.base.ClassNameHelper;
 import jvm.rtda.LocalVars;
 
 /**
@@ -103,6 +104,16 @@ public class Clazz {
         methods = Method.newMethods(this, classFile.getMethods(), classFile.getConstantPool());
     }
 
+    public Clazz(String name, ClassLoader classLoader) {
+        this.accessFlags = AccessFlagConst.ACC_PUBLIC;
+        this.name = name;
+        this.classLoader = classLoader;
+        this.initStarted = true;
+        this.supperClass = classLoader.loadClass("java/lang/Object");
+        this.interfaces = new Clazz[]{classLoader.loadClass("java/lang/Cloneable"),
+                classLoader.loadClass("java/io/Serializable")};
+    }
+
     public ClassLoader getClassLoader() {
         return classLoader;
     }
@@ -112,6 +123,10 @@ public class Clazz {
             return name.substring(0, name.lastIndexOf('/'));
         }
         return "";
+    }
+
+    public String getArrayName() {
+        return ClassNameHelper.getArrayClassName(this.getName());
     }
 
     public boolean isPublic() {
@@ -176,6 +191,10 @@ public class Clazz {
         return false;
     }
 
+    public boolean isArray() {
+        return name.startsWith("[");
+    }
+
     public Field[] getFields() {
         return fields;
     }
@@ -216,18 +235,75 @@ public class Clazz {
         return staticVars;
     }
 
-    public boolean isAssignableFrom(Clazz clazz) {
-        if (clazz == this) {
-            return true;
+    public Field getField(String fieldName, String fieldDescriptor) {
+        for (Clazz c = this; c != null; c = c.supperClass) {
+            for (Field field : c.getFields()) {
+                if (field.getName().equals(fieldName) && field.getDescriptor().equals(fieldDescriptor)) {
+                    return field;
+                }
+            }
         }
-        if (this.isInterface()) {
-            clazz.isSubClassOf(this);
-        } else {
-            clazz.isImplements(this);
-        }
-        return false;
+        return null;
     }
 
+    /**
+     * 当前类是否是source的子类
+     */
+    public boolean isAssignableFrom(Clazz source) {
+        if (source == this) {
+            return true;
+        }
+        if (source.isArray()) {
+            if (this.isArray()) {
+                Clazz c1 = source.getComponentClass();
+                Clazz c2 = this.getComponentClass();
+                return c1 == c2 || c2.isAssignableFrom(c1);
+            } else {
+                if (this.isInterface()) {
+                    return this.isJlCloneable() || this.isJioSerializable();
+                } else {
+                    return this.isJlObject();
+                }
+            }
+        } else {
+            if (source.isInterface()) {
+                if (this.isInterface()) {
+                    //source和this都是接口
+                    return this.isSuperInterfaceOf(source);
+                } else {
+                    //当source为接口,this为类时,只有Object类才能为父类
+                    return this.isJlObject();
+                }
+            } else {
+                if (this.isInterface()) {
+                    //source为类,this为接口
+                    return source.isImplements(this);
+                } else {
+                    //source和this都为类
+                    return source.isSubClassOf(this);
+                }
+            }
+        }
+    }
+
+    public boolean isSuperInterfaceOf(Clazz source) {
+        return source.isSubInterfaceOf(this);
+    }
+
+    /**
+     * 判断当前类是否是Object
+     */
+    public boolean isJlObject() {
+        return "java/lang/Object".equals(name);
+    }
+
+    public boolean isJlCloneable() {
+        return "java/lang/Cloneable".equals(name);
+    }
+
+    public boolean isJioSerializable() {
+        return "java/io/Serializable".equals(name);
+    }
 
     public Method getClinitMethod() {
         for (Method method : methods) {
@@ -236,6 +312,11 @@ public class Clazz {
             }
         }
         return null;
+    }
+
+    public Clazz getComponentClass() {
+        String componentClassName = ClassNameHelper.getComponentClassName(this.name);
+        return classLoader.loadClass(componentClassName);
     }
 
 }
