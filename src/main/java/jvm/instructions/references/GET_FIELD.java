@@ -28,29 +28,29 @@ public class GET_FIELD extends Index16Instruction {
         if (object == null) {
             throw new RuntimeException("空指针");
         }
-        switch (field.getDescriptor()) {
-            case "Z":
-            case "B":
-            case "C":
-            case "S":
-            case "I":
+        switch (field.getDescriptor().charAt(0)) {
+            case 'Z':
+            case 'B':
+            case 'C':
+            case 'S':
+            case 'I':
                 int iVal = object.getFields().getInt(field.getSlotId());
                 stack.pushInt(iVal);
                 break;
-            case "F":
+            case 'F':
                 float fVal = object.getFields().getFloat(field.getSlotId());
                 stack.pushFloat(fVal);
                 break;
-            case "J":
+            case 'J':
                 long lVal = object.getFields().getLong(field.getSlotId());
                 stack.pushLong(lVal);
                 break;
-            case "D":
+            case 'D':
                 double dVal = object.getFields().getDouble(field.getSlotId());
                 stack.pushDouble(dVal);
                 break;
-            case "L":
-            case "[":
+            case 'L':
+            case '[':
                 Object oVal = object.getFields().getRef(field.getSlotId());
                 stack.pushRef(oVal);
                 break;

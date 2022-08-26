@@ -35,4 +35,14 @@ public class StringPool {
         return String.valueOf(chars.getChars());
     }
 
+    public static Object internString(Object jstr) {
+        String str = getString(jstr);
+        if (internedStrings.containsKey(str)) {
+            return internedStrings.get(str);
+        } else {
+            internedStrings.put(str, jstr);
+            return jstr;
+        }
+    }
+
 }

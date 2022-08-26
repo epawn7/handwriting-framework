@@ -19,6 +19,11 @@ public class Object {
     java.lang.Object data;
 
     /**
+     * 类信息对象,clazz
+     */
+    java.lang.Object extra;
+
+    /**
      * 创建对象
      *
      * @param clazz 对象的类
@@ -134,6 +139,10 @@ public class Object {
 
     //---数组特有方法----
 
+    public String getArrayTypeName() {
+        return data.getClass().getSimpleName();
+    }
+
     public int arrayLength() {
         switch (data.getClass().getSimpleName()) {
             case "byte[]":
@@ -160,6 +169,14 @@ public class Object {
     public Object getRefVar(String fieldName, String fieldDescriptor) {
         Field field = clazz.getField(fieldName, fieldDescriptor);
         return getFields().getRef(field.getSlotId());
+    }
+
+    public java.lang.Object getExtra() {
+        return extra;
+    }
+
+    public void setExtra(java.lang.Object extra) {
+        this.extra = extra;
     }
 
 }

@@ -7,6 +7,7 @@ import jvm.rtda.OperandStack;
 import jvm.rtda.heap.Constant;
 import jvm.rtda.heap.ConstantPool;
 import jvm.rtda.heap.StringPool;
+import jvm.rtda.heap.ref.ClassRef;
 
 public class LDC_Logic {
 
@@ -27,8 +28,12 @@ public class LDC_Logic {
                         (String) constant.getVal());
                 stack.pushRef(strObj);
                 break;
-//            case CONSTANT_Class_info:
-//                break;
+            case CONSTANT_Class_info:
+                ClassRef ref = (ClassRef) constant.getVal();
+                Object jclass = ref.resolvedClass().getjClass();
+                stack.pushRef(jclass);
+                break;
+            // case MethodType, MethodHandle //Java7中的特性，不在本虚拟机范围内
             default:
                 throw new RuntimeException("todo: ldc");
         }

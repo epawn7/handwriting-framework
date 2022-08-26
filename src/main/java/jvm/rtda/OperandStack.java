@@ -45,6 +45,18 @@ public class OperandStack {
         return slot.num;
     }
 
+    public void pushBool(boolean val) {
+        if (val) {
+            pushInt(1);
+        } else {
+            pushInt(0);
+        }
+    }
+
+    public boolean popBool() {
+        return popInt() != 0;
+    }
+
     public void pushFloat(float val) {
         Slot s = new Slot();
         s.num = Float.floatToIntBits(val);

@@ -153,6 +153,7 @@ import jvm.instructions.references.NEW;
 import jvm.instructions.references.NEW_ARRAY;
 import jvm.instructions.references.PUT_FIELD;
 import jvm.instructions.references.PUT_STATIC;
+import jvm.instructions.reserved.INVOKE_NATIVE;
 import jvm.instructions.stack.DUP;
 import jvm.instructions.stack.DUP2;
 import jvm.instructions.stack.DUP2_X1;
@@ -490,6 +491,8 @@ public class InstructionFactory {
     static SASTORE sastore = new SASTORE();
 
     static ARRAY_LENGTH array_length = new ARRAY_LENGTH();
+
+    static INVOKE_NATIVE invoke_native = new INVOKE_NATIVE();
 
     public static Instruction createInstruction(int opCode) {
         switch (opCode) {
@@ -898,8 +901,8 @@ public class InstructionFactory {
             // case 0xc9:
             // 	return new JSR_W();
             // case 0xca: breakpoint
-//            case 0xfe:
-//                return invoke_native;
+            case 0xfe:
+                return invoke_native;
             // case 0xff: impdep2
             default:
                 throw new RuntimeException("Unsupported opcode: " + opCode);

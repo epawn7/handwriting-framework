@@ -37,8 +37,6 @@ public class Interpreter {
                     break;
                 }
             } catch (Exception e) {
-//                System.out.print("return:");
-//                System.out.println(frame.getOperandStack().popInt());
                 e.printStackTrace();
                 return;
             }

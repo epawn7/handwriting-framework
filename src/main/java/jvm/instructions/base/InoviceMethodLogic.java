@@ -10,13 +10,13 @@ public class InoviceMethodLogic {
         Thread thread = frame.getThread();
         Frame newFrame = new Frame(thread, method);
         thread.pushFrame(newFrame);
-        if (method.isNative()) {
-            if (method.getName().equals("registerNatives")) {
-                thread.popFrame();
-            } else {
-                throw new RuntimeException("native方法不支持");
-            }
-        }
+//        if (method.isNative()) {
+//            if (method.getName().equals("registerNatives")) {
+//                thread.popFrame();
+//            } else {
+//                throw new RuntimeException("native方法不支持");
+//            }
+//        }
         int argCount = method.getArgSlotCount();
         if (argCount > 0) {
             for (int i = argCount - 1; i >= 0; i--) {

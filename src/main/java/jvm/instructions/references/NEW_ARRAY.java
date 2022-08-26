@@ -44,21 +44,21 @@ public class NEW_ARRAY implements Instruction {
     private Clazz getArrayClazz(int atype, ClassLoader classLoader) {
         switch (atype) {
             case ArrayTypeConst.AT_BOOLEAN:
-                return classLoader.loadArrayClass("[Z");
+                return classLoader.loadClass("[Z");
             case ArrayTypeConst.AT_BYTE:
-                return classLoader.loadArrayClass("[B");
+                return classLoader.loadClass("[B");
             case ArrayTypeConst.AT_CHAR:
-                return classLoader.loadArrayClass("[C");
+                return classLoader.loadClass("[C");
             case ArrayTypeConst.AT_SHORT:
-                return classLoader.loadArrayClass("[S");
+                return classLoader.loadClass("[S");
             case ArrayTypeConst.AT_INT:
-                return classLoader.loadArrayClass("[I");
+                return classLoader.loadClass("[I");
             case ArrayTypeConst.AT_LONG:
-                return classLoader.loadArrayClass("[J");
+                return classLoader.loadClass("[J");
             case ArrayTypeConst.AT_FLOAT:
-                return classLoader.loadArrayClass("[F");
+                return classLoader.loadClass("[F");
             case ArrayTypeConst.AT_DOUBLE:
-                return classLoader.loadArrayClass("[D");
+                return classLoader.loadClass("[D");
             default:
                 throw new RuntimeException("无效atype");
         }

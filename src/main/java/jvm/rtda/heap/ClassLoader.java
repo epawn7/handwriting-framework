@@ -2,24 +2,20 @@ package jvm.rtda.heap;
 
 import java.util.HashMap;
 import java.util.Map;
-import ioc.anno.Autowire;
-import ioc.anno.Compontment;
 import jvm.clazz.ClassFile;
 import jvm.clazz.ClassReader;
 import jvm.entry.ClassPath;
+import jvm.instructions.base.ClassNameHelper;
 import jvm.rtda.LocalVars;
 import jvm.rtda.Object;
 
 /**
  * 类加载器
  */
-@Compontment
 public class ClassLoader {
 
-    @Autowire
     ClassPath classPath;
 
-    @Autowire
     ClassReader classReader;
 
     /**
@@ -29,8 +25,40 @@ public class ClassLoader {
      */
     Map<String, Clazz> classMap;
 
-    public ClassLoader() {
+    public ClassLoader(ClassPath classPath, ClassReader classReader) {
+        this.classPath = classPath;
+        this.classReader = classReader;
         classMap = new HashMap<>();
+        loadBasicClass();
+        loadPrimitiveClasses();
+    }
+
+
+    private void loadBasicClass() {
+        Clazz jclassClazz = loadClass("java/lang/Class");
+        classMap.forEach((k, v) -> {
+            if (v.getjClass() == null) {
+                Object jclass = new Object(jclassClazz);
+                v.setjClass(jclass);
+                jclass.setExtra(v);
+            }
+        });
+    }
+
+    /**
+     * 加载void和基本类型
+     */
+    private void loadPrimitiveClasses() {
+        for (String className : ClassNameHelper.primitiveTypes.keySet()) {
+            loadPrimitiveClass(className);
+        }
+    }
+
+    private void loadPrimitiveClass(String className) {
+        Clazz clazz = new Clazz(className, this);
+        clazz.jClass = new Object(classMap.get("java/lang/Class"));
+        clazz.jClass.setExtra(clazz);
+        classMap.put(className, clazz);
     }
 
     public Clazz loadClass(String name) {
@@ -39,9 +67,18 @@ public class ClassLoader {
             return clazz;
         }
         if (name.startsWith("[")) {
-            return loadArrayClass(name);
+            clazz = loadArrayClass(name);
+        } else {
+            clazz = loadNoArrayClass(name);
         }
-        return loadNoArrayClass(name);
+
+        //为每一个 class 都关联一个元类
+        Clazz jclazzClass = classMap.get("java/lang/Class");
+        if (jclazzClass != null && clazz.jClass == null) {
+            clazz.jClass = new Object(jclazzClass);
+            clazz.jClass.setExtra(clazz);
+        }
+        return clazz;
     }
 
     public Clazz loadArrayClass(String name) {

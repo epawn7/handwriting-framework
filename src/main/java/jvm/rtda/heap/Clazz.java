@@ -5,6 +5,7 @@ import jvm.clazz.constant.ConstantClass;
 import jvm.clazz.constant.ConstantUtf8;
 import jvm.instructions.base.ClassNameHelper;
 import jvm.rtda.LocalVars;
+import jvm.rtda.Object;
 
 /**
  * 存放class相关信息
@@ -87,6 +88,11 @@ public class Clazz {
      */
     boolean initStarted;
 
+    /**
+     * 当前类属性对象
+     */
+    Object jClass;
+
     public Clazz(ClassFile classFile) {
         this.accessFlags = classFile.getAccessFlag();
         this.name = classFile.getClassName();
@@ -110,8 +116,7 @@ public class Clazz {
         this.classLoader = classLoader;
         this.initStarted = true;
         this.supperClass = classLoader.loadClass("java/lang/Object");
-        this.interfaces = new Clazz[]{classLoader.loadClass("java/lang/Cloneable"),
-                classLoader.loadClass("java/io/Serializable")};
+        this.interfaces = new Clazz[]{classLoader.loadClass("java/lang/Cloneable"), classLoader.loadClass("java/io/Serializable")};
     }
 
     public ClassLoader getClassLoader() {
@@ -123,6 +128,13 @@ public class Clazz {
             return name.substring(0, name.lastIndexOf('/'));
         }
         return "";
+    }
+
+    /**
+     * 获取java名称
+     */
+    public String getJavaName() {
+        return name.replace("/", ".");
     }
 
     public String getArrayName() {
@@ -317,6 +329,22 @@ public class Clazz {
     public Clazz getComponentClass() {
         String componentClassName = ClassNameHelper.getComponentClassName(this.name);
         return classLoader.loadClass(componentClassName);
+    }
+
+
+    public Object getjClass() {
+        return jClass;
+    }
+
+    public void setjClass(Object jClass) {
+        this.jClass = jClass;
+    }
+
+    /**
+     * 判断是否是基本类型
+     */
+    public boolean isPrimitive() {
+        return ClassNameHelper.primitiveTypes.containsKey(this.name);
     }
 
 }

@@ -45,6 +45,9 @@ public class LocalVars {
     }
 
     public int getInt(int index) {
+        if (localVars[index] == null) {
+            return 0;
+        }
         return localVars[index].num;
     }
 
@@ -63,6 +66,9 @@ public class LocalVars {
     }
 
     public Object getRef(int index) {
+        if (localVars[index] == null) {
+            return null;
+        }
         return localVars[index].object;
     }
 

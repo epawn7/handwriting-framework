@@ -33,12 +33,12 @@ public class PUT_FIELD extends Index16Instruction {
         String descriptor = field.getDescriptor();
         OperandStack stack = frame.getOperandStack();
         Object object;
-        switch (descriptor) {
-            case "Z":
-            case "B":
-            case "C":
-            case "S":
-            case "I":
+        switch (descriptor.charAt(0)) {
+            case 'Z':
+            case 'B':
+            case 'C':
+            case 'S':
+            case 'I':
                 int val = stack.popInt();
                 object = stack.popRef();
                 if (object == null) {
@@ -46,7 +46,7 @@ public class PUT_FIELD extends Index16Instruction {
                 }
                 object.getFields().setInt(field.getSlotId(), val);
                 break;
-            case "F":
+            case 'F':
                 float floatVal = stack.popFloat();
                 object = stack.popRef();
                 if (object == null) {
@@ -54,7 +54,7 @@ public class PUT_FIELD extends Index16Instruction {
                 }
                 object.getFields().setFloat(field.getSlotId(), floatVal);
                 break;
-            case "J":
+            case 'J':
                 long longVal = stack.popLong();
                 object = stack.popRef();
                 if (object == null) {
@@ -62,7 +62,7 @@ public class PUT_FIELD extends Index16Instruction {
                 }
                 object.getFields().setLong(field.getSlotId(), longVal);
                 break;
-            case "D":
+            case 'D':
                 double doubleVal = stack.popDouble();
                 object = stack.popRef();
                 if (object == null) {
@@ -70,8 +70,8 @@ public class PUT_FIELD extends Index16Instruction {
                 }
                 object.getFields().setDouble(field.getSlotId(), doubleVal);
                 break;
-            case "L":
-            case "[":
+            case 'L':
+            case '[':
                 Object ref = stack.popRef();
                 object = stack.popRef();
                 if (object == null) {

@@ -53,7 +53,7 @@ public class ClassNameHelper {
             }
             for (Entry<String, String> entry : primitiveTypes.entrySet()) {
                 if (entry.getValue().equals(className)) {
-                    return entry.getValue();
+                    return entry.getKey();
                 }
             }
         }
