@@ -37,4 +37,8 @@ public class Thread {
         return stack.isEmpty();
     }
 
+    public void clearStack() {
+        stack.clear();
+    }
+
 }

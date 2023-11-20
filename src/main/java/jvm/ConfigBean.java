@@ -13,7 +13,7 @@ public class ConfigBean {
     @Bean
     public Command command(){
         Command command = new Command();
-        command.setClassPath("D:\\software\\java-se-8u41-ri\\jre");
+        command.setClassPath("D:\\workspace\\jdk\\openjdk-8u342-b07\\jre");
         command.setUserClassPath("D:\\workspace\\study\\handwriting-framework\\target\\classes");
         command.setRight(true);
         command.setClazz("jvm/TestMain6");

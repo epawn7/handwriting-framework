@@ -108,4 +108,12 @@ public class OperandStack {
         return slot.object;
     }
 
+    public void clear() {
+        for (int i = 0; i < size; i++) {
+            slots[i] = null;
+        }
+        size = 0;
+
+    }
+
 }

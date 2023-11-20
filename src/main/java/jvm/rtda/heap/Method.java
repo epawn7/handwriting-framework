@@ -94,6 +94,11 @@ public class Method extends ClassMember {
         }
     }
 
+    public int findExceptionHandler(Clazz expClass, int pc) {
+        //todo
+        return 0;
+    }
+
 
     public int getMaxStack() {
         return maxStack;

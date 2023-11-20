@@ -105,9 +105,37 @@ public class CodeAttribute extends AttributeInfo {
 
         short endPc;
 
+        /**
+         * 负责异常处理的catch{}块在哪里
+         */
         short handlerPc;
 
+        /**
+         * 索引
+         *
+         * 通过它可以从运行时常量池中查到一个类符号引用，
+         * 解析后的类是个异常类，
+         * 假定这个类是 X。
+         * 如果位于start_pc和end_pc之间的指令抛出异常x，
+         * 且x是X（或者 X的子类）的实例
+         */
         short catchType;
+
+        public short getStartPc() {
+            return startPc;
+        }
+
+        public short getEndPc() {
+            return endPc;
+        }
+
+        public short getHandlerPc() {
+            return handlerPc;
+        }
+
+        public short getCatchType() {
+            return catchType;
+        }
 
     }
 

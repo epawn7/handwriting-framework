@@ -43,4 +43,10 @@ public class Stack {
         return topFrame == null;
     }
 
+    public void clear() {
+        while (!isEmpty()) {
+            pop();
+        }
+    }
+
 }
